@@ -6,17 +6,17 @@ const modelUrl = './weights'
 window.onload = function() {
   text.textContent = "onload"
   Promise.all([
-    /*faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl),
+    faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl),
     faceapi.nets.faceLandmark68Net.loadFromUri(modelUrl),
     faceapi.nets.faceRecognitionNet.loadFromUri(modelUrl),
-    faceapi.nets.faceExpressionNet.loadFromUri(modelUrl)*/
+    faceapi.nets.faceExpressionNet.loadFromUri(modelUrl)
 
     //faceapi.loadFaceLandmarkModel('./models')
     //faceapi.loadFaceRecognitionModel('./models'),
     //faceapi.loadFaceExpressionModel('./models'),
     //faceapi.loadTinyFaceDetectorModel('./models')
 
-    faceapi.nets.ssdMobilenetv1.load(modelUrl),
+    //faceapi.nets.ssdMobilenetv1.load(modelUrl),
     //faceapi.nets.faceLandmark68Net.load(modelUrl),
     
   ])
@@ -65,22 +65,22 @@ function changeText(){
   text.textContent = "OK"
 }
 
-video.addEventListener('play', () => {
+/*video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(player)
   document.body.append(canvas)
   const displaySize = { width: player.video.width, height: player.video.height }
   faceapi.matchDimensions(canvas, displaySize)
   setInterval(async () => {
-    /*const detections = await faceapi.detectAllFaces(player, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    const detections = await faceapi.detectAllFaces(player, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     faceapi.draw.drawDetections(canvas, resizedDetections)
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-    faceapi.draw.drawFaceExpressions(canvas, resizedDetections)*/
+    faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
-    const detections = await faceapi.detectAllFaces(player, new faceapi.SsdMobilenetv1Options())
-    const resizedDetections = faceapi.resizeResults(detections, displaySize)
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-    faceapi.draw.drawDetections(canvas, resizedDetections)
+    //const detections = await faceapi.detectAllFaces(player, new faceapi.SsdMobilenetv1Options())
+    //const resizedDetections = faceapi.resizeResults(detections, displaySize)
+    //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+    //faceapi.draw.drawDetections(canvas, resizedDetections)
   }, 100)
-})
+})*/
