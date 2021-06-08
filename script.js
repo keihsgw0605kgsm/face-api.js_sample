@@ -1,44 +1,17 @@
 const player = document.getElementById('video')
-const text = document.getElementById('text')
-const btn = document.getElementById('btn')
 const modelUrl = './weights'
 
-window.onload = function() {
-  text.textContent = "onload"
-}
-
 Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl),
+  //faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl),
+  faceapi.nets.ssdMobilenetv1.loadFromUri(modelUrl),
   faceapi.nets.faceLandmark68Net.loadFromUri(modelUrl),
   faceapi.nets.faceRecognitionNet.loadFromUri(modelUrl),
   //faceapi.nets.faceExpressionNet.loadFromUri(modelUrl)
-
-  //faceapi.loadFaceLandmarkModel('./models')
-  //faceapi.loadFaceRecognitionModel('./models'),
-  //faceapi.loadFaceExpressionModel('./models'),
-  //faceapi.loadTinyFaceDetectorModel('./models')
-
-  //faceapi.nets.ssdMobilenetv1.load(modelUrl),
-  //faceapi.nets.faceLandmark68Net.load(modelUrl),
 ])
 .catch((e) => {
-  text.textContent = ('エラー：'+e);
+  console.log('モデルをロードできません: '+e);
 })
-//.then(changeText)
 .then(startVideo)
-
-/*navigator.mediaDevices = navigator.mediaDevices || ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
-  getUserMedia: function(c) {
-    return new Promise(function(y, n) {
-      (navigator.mozGetUserMedia || navigator.webkitGetUserMedia).call(navigator, c,y,n);
-    });
-  }
-} : null);
-
-if(!navigator.mediaDevices) {
-  console.log("getUserMedia() not supported.");
-  return;
-}*/
 
 function startVideo() {
   var constraints = {
@@ -61,17 +34,14 @@ function startVideo() {
   });
 }
 
-function changeText(){
-  text.textContent = "OK"
-}
-
 player.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(player)
   document.body.append(canvas)
   const displaySize = { width: player.width, height: player.height }
   faceapi.matchDimensions(canvas, displaySize)
   setInterval(async () => {
-    const detections = await faceapi.detectAllFaces(player, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks()
+    //const detections = await faceapi.detectAllFaces(player, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+    const detections = await faceapi.detectAllFaces(player, new faceapi.SsdMobilenetv1Options()).withFaceLandmarks()
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     faceapi.draw.drawDetections(canvas, resizedDetections)
@@ -79,9 +49,9 @@ player.addEventListener('play', () => {
     //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
   }, 100)
   .catch((e) => {
-    text.textContent = e;
+    console.log('setIntervalでエラー：'+e);
   })
 })
 .catch((e) => {
-  text.textContent = e;
+  console.log('player.addEventListenerでエラー：'+e);
 })
