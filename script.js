@@ -67,7 +67,7 @@ function changeText(){
 
 video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(player)
-  //document.body.append(canvas)
+  document.body.appendChild(canvas)
   const displaySize = { width: player.video.width, height: player.video.height }
   //faceapi.matchDimensions(canvas, displaySize)
   /*setInterval(async () => {
