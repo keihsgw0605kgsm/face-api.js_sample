@@ -84,3 +84,6 @@ video.addEventListener('play', () => {
     //faceapi.draw.drawDetections(canvas, resizedDetections)
   }, 100)
 })
+.catch((e) => {
+  text.textContent = e;
+})
