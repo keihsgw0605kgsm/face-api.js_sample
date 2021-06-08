@@ -65,7 +65,7 @@ function changeText(){
   text.textContent = "OK"
 }
 
-/*video.addEventListener('play', () => {
+video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(player)
   document.body.append(canvas)
   const displaySize = { width: player.video.width, height: player.video.height }
@@ -83,4 +83,4 @@ function changeText(){
     //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     //faceapi.draw.drawDetections(canvas, resizedDetections)
   }, 100)
-})*/
+})
