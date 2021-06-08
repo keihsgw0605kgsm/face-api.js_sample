@@ -5,27 +5,27 @@ const modelUrl = './weights'
 
 window.onload = function() {
   text.textContent = "onload"
-  Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl),
-    faceapi.nets.faceLandmark68Net.loadFromUri(modelUrl),
-    faceapi.nets.faceRecognitionNet.loadFromUri(modelUrl),
-    faceapi.nets.faceExpressionNet.loadFromUri(modelUrl)
-
-    //faceapi.loadFaceLandmarkModel('./models')
-    //faceapi.loadFaceRecognitionModel('./models'),
-    //faceapi.loadFaceExpressionModel('./models'),
-    //faceapi.loadTinyFaceDetectorModel('./models')
-
-    //faceapi.nets.ssdMobilenetv1.load(modelUrl),
-    //faceapi.nets.faceLandmark68Net.load(modelUrl),
-    
-  ])
-  .catch((e) => {
-    text.textContent = ('エラー：'+e);
-  })
-  //.then(changeText)
-  .then(startVideo)
 }
+
+Promise.all([
+  faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl),
+  faceapi.nets.faceLandmark68Net.loadFromUri(modelUrl),
+  faceapi.nets.faceRecognitionNet.loadFromUri(modelUrl),
+  faceapi.nets.faceExpressionNet.loadFromUri(modelUrl)
+
+  //faceapi.loadFaceLandmarkModel('./models')
+  //faceapi.loadFaceRecognitionModel('./models'),
+  //faceapi.loadFaceExpressionModel('./models'),
+  //faceapi.loadTinyFaceDetectorModel('./models')
+
+  //faceapi.nets.ssdMobilenetv1.load(modelUrl),
+  //faceapi.nets.faceLandmark68Net.load(modelUrl),
+])
+.catch((e) => {
+  text.textContent = ('エラー：'+e);
+})
+//.then(changeText)
+.then(startVideo)
 
 /*navigator.mediaDevices = navigator.mediaDevices || ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
   getUserMedia: function(c) {
