@@ -83,6 +83,9 @@ video.addEventListener('play', () => {
     //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     //faceapi.draw.drawDetections(canvas, resizedDetections)
   }, 100)
+  .catch((e) => {
+    text.textContent = e;
+  })
 })
 .catch((e) => {
   text.textContent = e;
