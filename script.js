@@ -1,7 +1,7 @@
 const player = document.getElementById('video')
 const text = document.getElementById('text')
 const btn = document.getElementById('btn')
-const modelUrl = './models'
+const modelUrl = './weights'
 
 window.onload = function() {
   text.textContent = "onload"
