@@ -88,7 +88,7 @@ player.addEventListener('play', () => {
 function handleDownload() {
   let data = test_csv.map((test_csv)=>test_csv.json(',')).json('\r\n');
 
-  var blob = new Blob([ data ], { "type" : "text/plain" });
+  var blob = new Blob([ data ], { "type" : "text/csv" });
   var url = window.URL.createObjectURL(blob);
   download.href = url;
   window.navigator.msSaveBlob(blob, "test_face.csv");
