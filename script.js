@@ -78,14 +78,14 @@ player.addEventListener('play', () => {
 })
 
 /** jsonファイルのダウンロード **/
-/*function handleDownload() {
+function handleDownload() {
   var blob = new Blob([ detections_json ], { "type" : "text/plain" });
   var url = window.URL.createObjectURL(blob);
   download.href = url;
   window.navigator.msSaveBlob(blob, "test_face.json"); 
-}*/
+}
 
-function handleDownload() {
+/*function handleDownload() {
   let test_csv = [
     ['ID','商品名','価格'],
     [1, 'りんご（箱)', 100],
@@ -100,5 +100,5 @@ function handleDownload() {
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
   //download.download = "test_face.csv"
-  window.navigator.msSaveBlob(blob, "test_face.csv");
+  window.navigator.msSaveBlob(blob, "test_face.csv");*/
 }
