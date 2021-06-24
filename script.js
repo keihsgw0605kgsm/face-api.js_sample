@@ -86,10 +86,10 @@ player.addEventListener('play', () => {
 }*/
 
 function handleDownload() {
-  let data = test_csv.map((test_csv)=>test_csv.json(',')).json('\r\n');
-  var bom = new Uint8Array([0xEF, 0xEF, 0xEF, 0xEF, 0xEF, 0xEF, 0xEF, 0xEF])
+  let data = test_csv.map((arr)=>arr.json(',')).json('\r\n');
+  var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
 
-  var blob = new Blob([ bom, data ], { type : "text/csv" });
+  var blob = new Blob([ bom, data ], { "type" : "text/csv" });
   //var url = window.URL.createObjectURL(blob);
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
