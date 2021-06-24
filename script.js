@@ -1,8 +1,9 @@
 const player = document.getElementById('video')
 const download = document.getElementById('download')
-const p_text = document.getElementById('test')
+//const p_text = document.getElementById('test')
 var detections_json = "No Data"
 const modelUrl = './weights'
+var test_csv = []
 
 /**モデルのロード**/
 Promise.all([
@@ -57,8 +58,13 @@ player.addEventListener('play', () => {
     //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
     detections_json = JSON.stringify(detections, null, '\t');
-    //var detections_json1 = JSON.parse(detections)
-    p_text.textContent = detections[0]['detection']['_box']['_x']
+    //p_text.textContent = detections[0]['detection']['_box']['_x']
+
+    test_csv = [
+      ['_x', '_y', '_width', '_height', 'x0', 'y0', 'x1', 'y1'],
+      [detections[0]['detection']['_box']['_x'], detections[0]['detection']['_box']['_y'], detections[0]['detection']['_box']['_width'], detections[0]['detection']['_box']['_height'], detections[0]['landmarks']['_positions'][0]['_x'], detections[0]['landmarks']['_positions'][0]['_y'], detections[0]['landmarks']['_positions'][1]['_x'], detections[0]['landmarks']['_positions'][1]['_y']]
+    ]
+
 
     //結果の出力
     console.log(detections);
@@ -72,9 +78,18 @@ player.addEventListener('play', () => {
 })
 
 /** jsonファイルのダウンロード **/
-function handleDownload() {
+/*function handleDownload() {
   var blob = new Blob([ detections_json ], { "type" : "text/plain" });
   var url = window.URL.createObjectURL(blob);
   download.href = url;
   window.navigator.msSaveBlob(blob, "test_face.json"); 
+}*/
+
+function handleDownload() {
+  let data = test_csv.map((test_csv)=>test_csv.json(',')).json('\r\n');
+
+  var blob = new Blob([ data ], { "type" : "text/plain" });
+  var url = window.URL.createObjectURL(blob);
+  download.href = url;
+  window.navigator.msSaveBlob(blob, "test_face.csv");
 }
