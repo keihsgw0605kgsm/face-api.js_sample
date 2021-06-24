@@ -19,7 +19,6 @@ Promise.all([
 
 /**カメラを用いたビデオストリーミング**/
 function startVideo() {
-  p_text.textContent = "2"
   var constraints = {
     audio: true,
     video: {
@@ -50,7 +49,7 @@ player.addEventListener('play', () => {
   setInterval(async () => {
     const detections = await faceapi.detectAllFaces(player, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks()
     detections_json = JSON.stringify(detections, null, '\t');
-    p_text.textContent = "1"//detections_json['detection']['_box']['_x']
+    p_text.textContent = detections_json[0]['detection']['_box']['_x']
 
     
     //const detections = await faceapi.detectAllFaces(player, new faceapi.SsdMobilenetv1Options()).withFaceLandmarks()
