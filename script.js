@@ -48,9 +48,6 @@ player.addEventListener('play', () => {
   
   setInterval(async () => {
     const detections = await faceapi.detectAllFaces(player, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks()
-    detections_json = JSON.stringify(detections, null, '\t');
-    p_text.textContent = detections_json[0]['detection']['_box']['_x']
-
     
     //const detections = await faceapi.detectAllFaces(player, new faceapi.SsdMobilenetv1Options()).withFaceLandmarks()
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
@@ -58,6 +55,9 @@ player.addEventListener('play', () => {
     faceapi.draw.drawDetections(canvas, resizedDetections)
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
     //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+
+    detections_json = JSON.stringify(detections, null, '\t');
+    p_text.textContent = detections_json['detection']['_box']['_x']
 
     //結果の出力
     console.log(detections);
