@@ -1,6 +1,6 @@
 const player = document.getElementById('video')
 const download = document.getElementById('download')
-//const p_text = document.getElementById('test')
+const p_text = document.getElementById('test')
 var detections_json = "No Data"
 const modelUrl = './weights'
 var test_csv = []
@@ -58,12 +58,12 @@ player.addEventListener('play', () => {
     //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
     detections_json = JSON.stringify(detections, null, '\t');
-    //p_text.textContent = detections[0]['detection']['_box']['_x']
+    p_text.textContent = detections[0]['landmarks']['_positions'][1]['_x']
 
-    test_csv = [
+    /*test_csv = [
       ['_x', '_y', '_width', '_height', 'x0', 'y0', 'x1', 'y1'],
       [detections[0]['detection']['_box']['_x'], detections[0]['detection']['_box']['_y'], detections[0]['detection']['_box']['_width'], detections[0]['detection']['_box']['_height'], detections[0]['landmarks']['_positions'][0]['_x'], detections[0]['landmarks']['_positions'][0]['_y'], detections[0]['landmarks']['_positions'][1]['_x'], detections[0]['landmarks']['_positions'][1]['_y']]
-    ]
+    ]*/
 
 
     //結果の出力
