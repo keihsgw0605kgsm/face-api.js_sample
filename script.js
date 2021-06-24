@@ -91,21 +91,23 @@ function handleDownload() {
     [1, 'りんご（箱)', 100],
     [2, 'みかん　(箱)', 1200]
   ]
-  let data = test_csv.map((arr)=>arr.json('\t')).json('\r\n');
-  var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
+  let data = test_csv.map((arr)=>arr.json(',')).json('\r\n');
+  
+  /*var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
 
   var blob = new Blob([ bom, data ], { "type" : "text/csv" });
   //var url = window.URL.createObjectURL(blob);
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
-  window.navigator.msSaveBlob(blob, "test_face.csv");
+  window.navigator.msSaveBlob(blob, "test_face.csv");*/
 
-  /*download.download = 'test_face.csv';
-  download.href = URL.createObjectURL(blob);
-  download.dataset.downloadurl = [
-    'text/plain',
-    download.download,
-    download.href
-  ].join(':');
-  download.click();*/
+  let bom  = new Uint8Array([0xEF, 0xBB, 0xBF]);
+  let blob = new Blob([bom, data], {type: 'text/csv'});
+  let url = (window.URL || window.webkitURL).createObjectURL(blob);
+  let link = document.createElement('a');
+  link.download = 'result.csv';
+  link.href = url;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
