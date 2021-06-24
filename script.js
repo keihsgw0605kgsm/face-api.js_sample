@@ -1,6 +1,6 @@
 const player = document.getElementById('video')
 const download = document.getElementById('download')
-//const p_text = document.getElementById('test')
+const p_text = document.getElementById('test')
 var detections_json = "No Data"
 const modelUrl = './weights'
 var test_csv = []
@@ -58,7 +58,7 @@ player.addEventListener('play', () => {
     //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
     detections_json = JSON.stringify(detections, null, '\t');
-    //p_text.textContent = detections[0]['landmarks']['_positions'][1]['_x']
+    p_text.textContent = typeof(detections[0]['landmarks']['_positions'][1]['_x'])
 
     test_csv = [
       ['_x', '_y', '_width', '_height', 'x0', 'y0', 'x1', 'y1'],
@@ -94,4 +94,13 @@ function handleDownload() {
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
   window.navigator.msSaveBlob(blob, "test_face.csv");
+
+  /*download.download = 'test_face.csv';
+  download.href = URL.createObjectURL(blob);
+  download.dataset.downloadurl = [
+    'text/plain',
+    download.download,
+    download.href
+  ].join(':');
+  download.click();*/
 }
