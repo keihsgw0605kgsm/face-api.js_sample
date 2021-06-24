@@ -3,7 +3,7 @@ const download = document.getElementById('download')
 //const p_text = document.getElementById('test')
 var detections_json = "No Data"
 const modelUrl = './weights'
-var test_csv = [[],[]]
+var test_csv = []
 
 /**モデルのロード**/
 Promise.all([
@@ -86,6 +86,11 @@ player.addEventListener('play', () => {
 }*/
 
 function handleDownload() {
+  let test_csv = [
+    ['ID','商品名','価格'],
+    [1, 'りんご（箱)', 100],
+    [2, 'みかん　(箱)', 1200]
+  ]
   let data = test_csv.map((arr)=>arr.json('\t')).json('\r\n');
   var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
 
