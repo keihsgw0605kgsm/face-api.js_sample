@@ -19,6 +19,7 @@ Promise.all([
 
 /**カメラを用いたビデオストリーミング**/
 function startVideo() {
+  p.textContent = "2"
   var constraints = {
     audio: true,
     video: {
