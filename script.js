@@ -57,7 +57,8 @@ player.addEventListener('play', () => {
     //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
     detections_json = JSON.stringify(detections, null, '\t');
-    p_text.textContent = detections_json//['detection']['_box']['_x']
+    var detections_json1 = JSON.parse(detections)
+    p_text.textContent = detections_json1['detection']['_box']['_x']
 
     //結果の出力
     console.log(detections);
