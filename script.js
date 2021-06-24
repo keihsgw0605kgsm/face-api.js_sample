@@ -99,6 +99,6 @@ function handleDownload() {
   //var url = window.URL.createObjectURL(blob);
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
-  download.download = "test_face.csv"
-  //window.navigator.msSaveBlob(blob, "test_face.csv");
+  //download.download = "test_face.csv"
+  window.navigator.msSaveBlob(blob, "test_face.csv");
 }
