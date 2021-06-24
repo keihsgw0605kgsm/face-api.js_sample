@@ -93,21 +93,12 @@ function handleDownload() {
   ]
   let data = test_csv.map((arr)=>arr.json(',')).json('\r\n');
   
-  /*var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
+  var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
 
   var blob = new Blob([ bom, data ], { "type" : "text/csv" });
   //var url = window.URL.createObjectURL(blob);
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
-  window.navigator.msSaveBlob(blob, "test_face.csv");*/
-
-  let bom  = new Uint8Array([0xEF, 0xBB, 0xBF]);
-  let blob = new Blob([bom, data], {type: 'text/csv'});
-  let url = (window.URL || window.webkitURL).createObjectURL(blob);
-  let link = document.createElement('a');
-  link.download = 'result.csv';
-  link.href = url;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  download.download = "test_face.csv"
+  //window.navigator.msSaveBlob(blob, "test_face.csv");
 }
