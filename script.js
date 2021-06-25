@@ -1,5 +1,5 @@
 const player = document.getElementById('video')
-const download = document.getElementById('download')
+//const download = document.getElementById('download')
 //const p_text = document.getElementById('test')
 var detections_json = "No Data"
 const modelUrl = './weights'
@@ -61,7 +61,7 @@ player.addEventListener('play', () => {
     //p_text.textContent = typeof(detections[0]['landmarks']['_positions'][1]['_x'])
 
     test_csv = [
-      ["_x", "_y", "_width", "_height", "x0", "y0", "x1", "y1"],
+      ['_x', '_y', '_width', '_height', 'x0', 'y0', 'x1', 'y1'],
       [detections[0]['detection']['_box']['_x'], detections[0]['detection']['_box']['_y'], detections[0]['detection']['_box']['_width'], detections[0]['detection']['_box']['_height'], detections[0]['landmarks']['_positions'][0]['_x'], detections[0]['landmarks']['_positions'][0]['_y'], detections[0]['landmarks']['_positions'][1]['_x'], detections[0]['landmarks']['_positions'][1]['_y']]
     ]
 
@@ -86,20 +86,13 @@ player.addEventListener('play', () => {
 }*/
 
 function handleDownload() {
-  /*let test_csv = [
-    ['ID','商品名','価格'],
-    [1, 'りんご（箱)', 100],
-    [2, 'みかん　(箱)', 1200]
-  ]*/
   
   let data = test_csv.map((record)=>record.join(',')).join('\r\n');
   
   var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
 
   var blob = new Blob([ bom, data ], { "type" : "text/csv" });
-  //var url = window.URL.createObjectURL(blob);
   let url = (window.URL || window.webkitURL).createObjectURL(blob);
   download.href = url;
-  //download.download = "test_face.csv"
   window.navigator.msSaveBlob(blob, "test_face.csv");
 }
